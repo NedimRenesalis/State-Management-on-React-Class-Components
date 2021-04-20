@@ -27,11 +27,11 @@ state = {
     total: 0
   }
 
-add = () => {
-    this.setState({
-      cart: ['ice cream'],
-      total: 5
-    })
+add = (product) => {
+    this.setState(state => ({
+      cart: [...state.cart, product.name],
+      total: state.total + product.price
+    }))
   }
 
 currencyOptions = {
@@ -60,7 +60,7 @@ remove = () => {
           {products.map(product => (
             <div key={product.name}>
         <div className="product"><span role="img" aria-label="ice cream">🍦</span></div>
-        <button onClick={this.add}>Add</button>
+        <button onClick={() => this.add(product)}>Add</button>
         <button onClick={this.remove}>Remove</button>
  </div>
           ))}

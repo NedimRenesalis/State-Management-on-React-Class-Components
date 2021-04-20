@@ -24,6 +24,12 @@ getTotal = () => {
     return this.state.total.toLocaleString(undefined, this.currencyOptions)
   }
 
+remove = () => {
+    this.setState({
+      cart: []
+    })
+  }
+
  render() {
     return(
       <div className="wrapper">
@@ -34,7 +40,7 @@ getTotal = () => {
 
         <div className="product"><span role="img" aria-label="ice cream">🍦</span></div>
         <button onClick={this.add}>Add</button>
-        <button>Remove</button>
+        <button onClick={this.remove}>Remove</button>
       </div>
     )
   }

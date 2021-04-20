@@ -33,7 +33,7 @@ getTotal = () => {
         <div>Total: {this.getTotal()}</div>
 
         <div className="product"><span role="img" aria-label="ice cream">🍦</span></div>
-        <button onClick={this.add}>Add</button>
+        
         <button>Remove</button>
       </div>
     )

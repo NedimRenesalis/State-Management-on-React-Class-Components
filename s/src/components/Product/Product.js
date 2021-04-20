@@ -43,11 +43,17 @@ getTotal = () => {
     return this.state.total.toLocaleString(undefined, this.currencyOptions)
   }
 
-remove = () => {
-    this.setState({
-      cart: []
+remove = (product) => {
+    this.setState(state => {
+      const cart = [...state.cart];
+      cart.splice(cart.indexOf(product.name))
+      return ({
+        cart,
+        total: state.total - product.price
+      })
     })
   }
+
 
  render() {
     return(
@@ -61,7 +67,7 @@ remove = () => {
             <div key={product.name}>
         <div className="product"><span role="img" aria-label="ice cream">🍦</span></div>
         <button onClick={() => this.add(product)}>Add</button>
-        <button onClick={this.remove}>Remove</button>
+        <button onClick={() => this.remove(product)}>Remove</button>
  </div>
           ))}
         </div>    

@@ -24,13 +24,11 @@ export default class Product extends Component {
  
 state = {
     cart: [],
-    total: 0
   }
 
 add = (product) => {
     this.setState(state => ({
-      cart: [...state.cart, product.name],
-      total: state.total + product.price
+      cart: [...state.cart, product],
     }))
   }
 
@@ -40,16 +38,20 @@ currencyOptions = {
   }
 
 getTotal = () => {
-    return this.state.total.toLocaleString(undefined, this.currencyOptions)
+    const total = this.state.cart.reduce((totalCost, item) => totalCost + item.price, 0);
+    return total.toLocaleString(undefined, this.currencyOptions)
   }
 
 remove = (product) => {
     this.setState(state => {
       const cart = [...state.cart];
-      cart.splice(cart.indexOf(product.name))
+      const productIndex = cart.findIndex(p => p.name === product.name);
+      if(productIndex < 0) {
+        return;
+      }
+      cart.splice(productIndex, 1)
       return ({
-        cart,
-        total: state.total - product.price
+        cart
       })
     })
   }
